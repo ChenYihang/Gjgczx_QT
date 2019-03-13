@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>dataReceive</class>
+ <widget class="QWidget" name="dataReceive">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>852</width>
+    <height>510</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="rc.qrc">
+    <normaloff>:/emqlogo.png</normaloff>:/emqlogo.png</iconset>
+  </property>
+  <widget class="QPlainTextEdit" name="dataRcvShow">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>50</y>
+     <width>831</width>
+     <height>451</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 9pt &quot;微软雅黑&quot;;</string>
+   </property>
+   <property name="readOnly">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QWidget" name="horizontalLayoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>731</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout_12">
+    <item>
+     <widget class="QLabel" name="label_12">
+      <property name="styleSheet">
+       <string notr="true">font: 11pt &quot;微软雅黑&quot;;</string>
+      </property>
+      <property name="text">
+       <string>设置当前接收主题:</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QComboBox" name="rcvTopic1">
+      <property name="styleSheet">
+       <string notr="true">background-color:rgb(218, 223, 237);                                       
+font: 11pt &quot;微软雅黑&quot;;
+</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QSpinBox" name="rcvNum">
+      <property name="maximumSize">
+       <size>
+        <width>50</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font: 11pt &quot;微软雅黑&quot;;
+color: rgb(60, 68, 106);
+
+background-color:rgb(218, 223, 237);                                       
+</string>
+      </property>
+      <property name="minimum">
+       <number>1</number>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QComboBox" name="rcvTopic2">
+      <property name="styleSheet">
+       <string notr="true">font: 11pt &quot;微软雅黑&quot;;
+background-color:rgb(218, 223, 237);                                       
+</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="topicSet">
+      <property name="styleSheet">
+       <string notr="true">QPushButton
+{
+font: 11pt &quot;微软雅黑&quot;;
+
+color: black; 
+background-color:rgb(218, 223, 237);                                       
+
+	
+border:1px groove black; 
+border-style: outset;
+}
+QPushButton::hover
+{ /*鼠标悬停在按钮上时*/
+font: 11pt &quot;微软雅黑&quot;;
+color: black;
+ background-color: rgb(255, 255, 255);
+border:1px groove black; 
+border-style: outset;
+}
+QPushButton::pressed
+{
+font: 11pt &quot;微软雅黑&quot;;
+color: black; 
+border:1px groove black; 
+	background-color: rgb(201, 206, 218);
+border-style: outset;
+}
+
+                   </string>
+      </property>
+      <property name="text">
+       <string>确认</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <spacer name="horizontalSpacer">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeType">
+       <enum>QSizePolicy::Maximum</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item>
+     <widget class="QCheckBox" name="ckHexReceive">
+      <property name="styleSheet">
+       <string notr="true">font: 11pt &quot;微软雅黑&quot;;
+</string>
+      </property>
+      <property name="text">
+       <string>16进制接收</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="clearScreen">
+      <property name="styleSheet">
+       <string notr="true">QPushButton
+{
+font: 11pt &quot;微软雅黑&quot;;
+
+color: black; 
+background-color:rgb(218, 223, 237);                                       
+
+	
+border:1px groove black; 
+border-style: outset;
+}
+QPushButton::hover
+{ /*鼠标悬停在按钮上时*/
+font: 11pt &quot;微软雅黑&quot;;
+color: black;
+ background-color: rgb(255, 255, 255);
+border:1px groove black; 
+border-style: outset;
+}
+QPushButton::pressed
+{
+font: 11pt &quot;微软雅黑&quot;;
+color: black; 
+border:1px groove black; 
+	background-color: rgb(201, 206, 218);
+border-style: outset;
+}
+
+                   </string>
+      </property>
+      <property name="text">
+       <string>清屏</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources>
+  <include location="rc.qrc"/>
+ </resources>
+ <connections/>
+</ui>

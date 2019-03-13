@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>emqlogo.png</file>
+        <file>test.html</file>
+        <file>qwebchannel.js</file>
+    </qresource>
+</RCC>

@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <style type="text/css">
+        body, html,#allmap {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}
+    </style>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=Xelmf2Q9UcTqfor0ZIH5aWAMeubnbnSy
+"></script>
+
+     <script type="text/javascript" src="./qwebchannel.js"></script>
+    <title>批量转换</title>
+</head>
+<body>
+    <div id="allmap"></div>
+</body>
+</html>
+<script type="text/javascript">
+    var content;
+
+
+    new QWebChannel(qt.webChannelTransport, function(channel) {
+    // make dialog object accessible globally
+    content = channel.objects.content;
+
+
+
+    content.onMsg("Client connected, ready to send/receive messages!");
+});
+
+
+    function recvMessage(msg)
+    {
+        alert("接收到Qt发送的消息：" + msg);
+    }
+
+    var points = [new BMap.Point(113.341625,23.158023),
+                  new BMap.Point(113.34166,23.15806),
+                  new BMap.Point(113.34255683333333,23.157961666666665),
+
+    ];
+
+
+
+
+    //地图初始化
+    var bm = new BMap.Map("allmap");
+    bm.centerAndZoom(new BMap.Point(113.341583,23.1579655),19);
+
+    bm.addControl(new BMap.MapTypeControl({
+                mapTypes:[
+            BMAP_NORMAL_MAP,
+            BMAP_HYBRID_MAP
+        ]}));
+
+    bm.enableDragging();
+    //坐标转换完之后的回调函数
+    translateCallback = function (data){
+      if(data.status === 0) {
+        for (var i = 0; i < data.points.length; i++) {
+        var name = "hello";
+        var label = new BMap.Label(name,{offset: new BMap.Size(20, 0)});
+        var mak = new BMap.Marker(data.points[i]);
+        mak.setLabel(label);
+        mak.setTitle('String');
+          bm.addOverlay(mak);
+        bm.panTo(data.points[i]);
+        }
+      }
+    }
+    setTimeout(function(){
+        var convertor = new BMap.Convertor();
+        convertor.translate(points, 1, 5, translateCallback)
+    }, 1000);
+</script>
