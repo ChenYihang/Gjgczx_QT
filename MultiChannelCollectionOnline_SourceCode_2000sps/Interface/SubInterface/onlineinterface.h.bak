@@ -1,0 +1,158 @@
+#ifndef ONLINEINTERFACE_H
+#define ONLINEINTERFACE_H
+
+#include <QWidget>
+#include <QPushButton>
+#include <QSplitter>
+#include <QLabel>
+#include <QLineEdit>
+#include <QCheckBox>
+#include <QVBoxLayout>
+#include <QHBoxLayout>
+#include <QtCharts/QLineSeries>
+#include <QtCharts/QtCharts>
+#include <QtCharts/QScatterSeries>
+#include <QTabBar>
+#include <QList>
+#include <../Common/common.h>
+#include <SubInterface/comboboxt.h>
+#include <FFTW/fftw3.h>
+#include <SubInterface/rmsgroup.h>
+#include <SubInterface/colorcard.h>
+
+class OnlineInterface : public QWidget
+{
+    Q_OBJECT
+    protected:
+        explicit OnlineInterface(QWidget *parent = nullptr);
+    public:
+        ~OnlineInterface();
+
+    signals:
+
+    public slots:
+        void TimeSlotChanged(int index);
+        void RangeChanged(int index);
+        void ChannelChanged(int index);
+        void FrequencyChanged(int index);
+        void ChoiceOfflinePath();
+        void ChoiceOfflineFilePath();
+        void SlaveChanged(int index);
+        void UpdateData();
+        void UpdateRMSAndColorCard();
+        void StartUpdateData();
+        void SuspendUpdateData();
+        void StopUpdateData();
+    public:
+        static OnlineInterface *GetInstance();
+        void DoInit(int speed,QString dataDir);
+        void DoFree();
+
+    private:
+        void InitInterface();
+        void DestoryLeftInterface();
+        void DestoryRightInterface();
+        void UpdateTimeData();
+        void UpdateFrequencyData();
+        void UpdateFrequencyDataCalculation(QLineSeries *source,QLineSeries *object);
+        void RecordLog(QString message);
+    private:
+        static OnlineInterface *oni_offlineI;
+        int oni_speed;
+        typedef enum{
+            UPDATA_STATUS_START   = 0,
+            UPDATA_STATUS_SUSPEND = 1,
+            UPDATA_STATUS_STOP    = 2,
+        } UPDATA_STATUS;
+        QPushButton *oni_start;
+        QPushButton *oni_suspend;
+        QPushButton *oni_stop;
+        int oni_updateStatus;
+
+        ComboBoxT *oni_slave;
+        QHBoxLayout *oni_leftTop;
+        typedef struct {
+            QString id;
+            QString path;
+        } SLAVE_LIST;
+        QList<SLAVE_LIST> *oni_slaveList;
+
+        QLineEdit *oni_offlinePathEdit;
+        QPushButton *oni_offlinePathChoice;
+        QHBoxLayout *oni_offlinePathLayout;
+        QLineEdit *oni_offlineFilePathEdit;
+        QPushButton *oni_offlineFilePathChoice;
+        QHBoxLayout *oni_offlineFilePathLayout;
+
+        struct{
+            QChart *chart;
+            QChartView *view;
+            QValueAxis *axisX;
+            QValueAxis *axisY;
+            QLineSeries *(data[8]);
+        } oni_frequencyChart;
+
+        struct FFTW_SETTING{
+            double *inData;
+            fftw_complex *outData;
+            fftw_plan plan30;
+            fftw_plan plan60;
+            fftw_plan plan120;
+            int index;
+            int start;
+            int end;
+            int cursorFrom;
+            int cursorTo;
+        }oni_fftw;
+
+        QTextEdit *oni_log;
+        ColorCard *oni_colorCard;
+        QVBoxLayout *oni_left;
+        QWidget *oni_leftW;
+
+        ComboBoxT *oni_channel;
+        ComboBoxT *oni_timeSlot;
+        ComboBoxT *oni_range;
+        ComboBoxT *oni_frequency;
+        QHBoxLayout *oni_rightTop;
+        int oni_rangeBase;
+        struct{
+            QMutex mutex;
+            QLineSeries *(data[DATA_CHANNEL_COUNT]);
+            qreal curEndX;
+        }oni_realData;
+        struct{
+            QChart *chart;
+            QChartView *view;
+            QValueAxis *axisXShow;
+            QValueAxis *axisXValue;
+            QCategoryAxis *axisY;
+            RMSGroup *rmsGroup;
+        } oni_chart[4];
+        QSplitter *oni_splitH01to32;
+        QSplitter *oni_splitH33to64;
+        QSplitter *oni_splitV;
+        QVBoxLayout *oni_right;
+
+        //全局布局控件
+        QHBoxLayout *oni_mainLayout;
+
+        const static int READ_ITEM_COUNT = 10;
+        QTimer *oni_dataUpdateTimer;
+        struct{
+            QStringList fileList;
+            int curReadFilePosInList;
+            QFile file;
+            QByteArray buff;
+            QList<QPointF> *(newData[DATA_CHANNEL_COUNT]);
+        } oni_dataFile;
+
+        struct{
+            QTimer *updateTimer;
+            qreal valueList[DATA_CHANNEL_COUNT];
+            int pos;
+        } oni_RMSAndColorCard;
+};
+
+
+#endif // ONLINEINTERFACE_H
