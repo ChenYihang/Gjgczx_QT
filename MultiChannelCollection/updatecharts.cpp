@@ -23,20 +23,16 @@ updateCharts::~updateCharts(){
 
 void updateCharts::startPlotFile(QString fName){
 
-        //qDebug()<<fName;
-
     if(fName =="Cancel"){   //取消播放操作
         requestInterruption();
         quit();
         wait();
         MBcount=0;
         emit signalCurrentPlayState("");
-
         return;
 
     }
         fileName = fName;
-
         // fileSize = 1024;
         rFile = new QFile(fileName);
         if(!rFile->isOpen())
@@ -82,6 +78,7 @@ qreal updateCharts::getValue(QByteArray twoBytes){
     }
 }
 
+//绘图进程
 void updateCharts::run(){
     QByteArray dataPack;
     QList<qreal> timeYData[8];
@@ -114,11 +111,6 @@ void updateCharts::run(){
                     }
                 ++MBcount;
                 emit signalCurrentPlayState("Played: "+QString::number(MBcount)+"MB");
-
-
-
-
-           //     qDebug()<<rFile->pos();
 
           }
           else{

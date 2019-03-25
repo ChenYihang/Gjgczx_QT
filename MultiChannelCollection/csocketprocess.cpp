@@ -23,8 +23,6 @@ void CsocketProcess::acceptNewConnect(QTcpSocket *newConnect){
           //信号 添加新下位机
            emit signalAddNewClient(proClientHandle[iflag]->GetIP(),iflag);
             proClientHandle[iflag]->dealInitStart();  //创建数据处理进程句柄
-
-
            break;
         }
 }

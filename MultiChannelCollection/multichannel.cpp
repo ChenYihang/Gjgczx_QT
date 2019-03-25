@@ -18,7 +18,7 @@ MultiChannel::MultiChannel(QWidget *parent) :
 
     UIinitialization();
 
-
+    //test funciton
     pcap_if_t *alldevs;
     pcap_if_t *d;
     int i = 0;
