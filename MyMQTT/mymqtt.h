@@ -91,7 +91,6 @@ private slots:
 
     void on_downFile_clicked();
 
-    void on_downDataFile_clicked();
 
 
     void on_fileTopicSet_clicked();
@@ -99,6 +98,12 @@ private slots:
     void fileLogUpdate(unsigned int size, bool);
 
 
+
+    void on_sendFile_clicked();
+
+    void on_selectDataFile_clicked();
+
+    void on_fileTopicNum_valueChanged(int arg1);
 
 private:
     Ui::MyMQTT *ui;
@@ -109,7 +114,7 @@ private:
     QList<subscription *> subList;
 
     dataReceive *dataRcv;
-    normalFileRcv *fileRcv;
+    normalFileRcv *fileRcv[10];
 
 
     int curSubItem;
@@ -129,37 +134,44 @@ private:
     QString cmdTopic;
     QString fileTopic ;
 
+    QStringList dataFileList;
+
 
     int speedflag;
     int speedtemp;
     int speedflag_lr;
     int speedtemp_lr;
-    sendFile *sFile;
+    sendFile *sFile[10];
     QMqttClient *m_client;
     QFile *dataFile;
+
 };
 
 class sendFile : public QThread
 {
     Q_OBJECT
 public:
-    explicit sendFile(QFile *tFile,QObject *parent = nullptr):fileHandle(tFile){}
-
+    sendFile();
 signals:
     void sendFinish();
+    void sendCancel();
+    void startSend(QString fileName);
     void toPublish(const QByteArray &data);
 public slots:
     void run();
-
+    void init(QStringList &list){fileList = list;};
     void stopSend(){
         QMutexLocker locker(&m_lock);
         runFlag = false;
 
     }
+    void nextFile(){fileWait = false;}
 private:
-    QFile *fileHandle;
+    QStringList fileList;
     QMutex m_lock;
     bool runFlag;
+    QFile *fileDeal;
+    bool fileWait;
 
 
 };

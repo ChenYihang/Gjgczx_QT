@@ -105,21 +105,27 @@ void dataReceive::newRcvSub(QMqttSubscription *sub){
 }
 
 
-
-
-normalFileRcv::normalFileRcv(QString path, QMqttSubscription *sub, QObject *parent) :
-    QObject(parent), filePath(path),fileSub(sub)
+normalFileRcv::normalFileRcv(QObject *parent) : QObject(parent)
 {
-    connect(fileSub, &QMqttSubscription::messageReceived, this, &normalFileRcv::receiveFile);
     threadPool = new QThreadPool();
     threadPool->setMaxThreadCount(10);
 
 }
+
 normalFileRcv::~normalFileRcv(){
-    delete  threadPool;
-    if(fileSub)
-        delete  fileSub;
+      delete  threadPool;
+ }
+
+void normalFileRcv::init(QString path, QMqttSubscription *sub)
+{
+    filePath=path;
+    fileSub = sub;
+    isTopicSet = true;
+    connect(fileSub, &QMqttSubscription::messageReceived, this, &normalFileRcv::receiveFile);
+
+
 }
+
 
 
 void normalFileRcv::receiveFile(const QMqttMessage &msg){
@@ -136,6 +142,9 @@ void normalFileRcv::receiveFile(const QMqttMessage &msg){
      if(tList.last()=="UPFILE"){
          rcvType = armFileData;
 
+     }else if(topic.contains("CMD")){
+         emit normalData(realMsg);
+         return;
      }
 
      QString realPath = filePath + topic;

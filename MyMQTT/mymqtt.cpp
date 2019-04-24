@@ -23,6 +23,10 @@ MyMQTT::MyMQTT(QWidget *parent) :
      connect(serverInfo[i],&infoUpdate::infoToUi,this,&MyMQTT::updateInfo);
 
     }
+    for(int i=0;i<10;i++){
+        fileRcv[i]= new normalFileRcv();
+        sFile[i] = new sendFile();
+    }
 
     dataRcv = nullptr;
     curSubItem = -1;
@@ -43,6 +47,13 @@ MyMQTT::~MyMQTT()
     delete m_client;
     for(int i =0;i<5;i++)
      delete serverInfo[i];
+    if(dataRcv){
+        delete  dataRcv;
+    }
+    for(int i=0;i<10;i++){
+        delete fileRcv[i];
+        delete sFile[i];
+    }
 
 }
 
@@ -126,7 +137,7 @@ void MyMQTT::initForm(){
   ui->openInfo->setEnabled(false);
   ui->topicSet->setEnabled(false);
 
-
+  ui->fileTopicNum->setRange(0,9);
 
 
 }
@@ -153,7 +164,6 @@ void MyMQTT::initCmd(){
     ui->fileTopic1->addItem("/PCMQTT");
     ui->fileTopic2->addItem("/CC3200@PAD");
     ui->fileTopic3->addItem("/DLFILE");
-    ui->fileTopic3->addItem("/CMD");
 
 
 
@@ -1175,83 +1185,132 @@ void MyMQTT::on_downFile_clicked()  //DA数据文件 较小
 
 }
 
-void MyMQTT::on_downDataFile_clicked()
+
+void MyMQTT::on_selectDataFile_clicked()
 {
-    QString dataFileFullPath;
+    ui->sendFile->setEnabled(false);
+    QStringList fileNames;
     QFileInfo dataFileInfo;
     QString dataFileName;
-
-    if(ui->downDataFile->text()=="下发数据文件")
-    dataFileFullPath = QFileDialog::getOpenFileName(this);
-
-      dataFile = new QFile;;
-    if(ui->downDataFile->text()=="取消发送")
-        {
-        ui->downDataFile->setText("下发数据文件");  //发送不成功时复位按键
-        if(sFile)
-            sFile->stopSend();  //停止发送 终止线程
-
-        dataFile->close();
-        return;
-
-        }
-
-    if(!dataFileFullPath.isEmpty())
-    {
-        dataFileInfo = QFileInfo(dataFileFullPath);
-        dataFileName = dataFileInfo.absoluteFilePath();
-        ui->downDataFile->setText("取消发送");
-        dataFile=new QFile(dataFileName);
-
-        if(dataFileInfo.suffix()=="dat"||dataFileInfo.suffix()=="png")    //判断文件后缀名，.dat则不能使用TEXT_IODEVICE格式打开，否则会丢失0x0d字符，导致文件发送出错
-            dataFile->open(QIODevice::ReadOnly);
-        else
-        dataFile->open(QIODevice::ReadOnly | QIODevice::Text);//读取DA数据源文件，格式为TXT
-
-
-        sFile = new sendFile(dataFile);
-        connect(sFile,&sendFile::sendFinish,this,[this](){ui->downDataFile->setText("下发数据文件");   ui->fileLogShow->appendPlainText(QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss ")
-                                                                                                                                  + "数据文件下发成功!");delete sFile;});
-        connect(sFile,&sendFile::toPublish,this,[this](const QByteArray &data){if((m_client->publish(fileTopic,data,2,false))<0)qDebug()<<"publish error";});
-
-        sFile->start();
-        const QString content = QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss ")
-                        + "开始下发数据文件!";
-        ui->fileLogShow->appendPlainText(content);
-
-
+    fileNames = QFileDialog::getOpenFileNames(this);
+    for(int i =0;i < fileNames.size();i++){
+        if(!dataFileList.contains(fileNames.at(i)))
+        dataFileList.append(fileNames.at(i));
     }
+    ui->sendFile->setEnabled(true);
+    ui->fileLogShow->appendPlainText(QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss ") + "添加" + QString::number(fileNames.size())+"个下发文件!");
 
 }
 
+void MyMQTT::on_sendFile_clicked()
+{
+    if(dataFileList.isEmpty())
+        return;
+    int topicIndex = ui->fileTopicNum->value();
 
+    if(ui->sendFile->text()=="停止")
+    {
+    ui->sendFile->setText("下发");  //发送不成功时复位按键
+        sFile[ui->fileTopicNum->value()]->stopSend();  //停止发送 终止线程
+    return;
+    }
+
+    if(ui->sendFile->text()=="下发")     
+        if(!dataFileList.isEmpty())
+        {
+            ui->sendFile->setText("停止");
+            sFile[topicIndex]->init(dataFileList);
+
+
+            sFile[topicIndex]->start();
+            const QString content = QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss ")
+                            + "开始下发数据文件!";
+            ui->fileLogShow->appendPlainText(content);
+
+
+         }
+
+}
 
 void MyMQTT::on_fileTopicSet_clicked()
 {
     static QString Rcvtopic = "";
 
-    fileTopic = ui->fileTopic1->currentText()+ui->fileTopic2->currentText()+"/"
-                    +QString::number(ui->fileTopicNum->value())+ui->fileTopic3->currentText();
-    const QString content = QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss ")
-                    + QLatin1String("Current SendFileTopic: ")+fileTopic;
-    m_client->unsubscribe(Rcvtopic);
     Rcvtopic = "/CC3200@PAD/"+QString::number(ui->fileTopicNum->value())+"/PADDATA/#";
 
-    const QString content1 = QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss ")
-                    + QLatin1String("Current RcvFileTopic: ")+Rcvtopic;
+    int topicIndex = ui->fileTopicNum->value();
+    if(ui->fileTopicSet->text()=="确认"){
+        ui->fileTopicSet->setText("取消");
 
-    //Rcvtopic = "fff-theme";
-    QMqttSubscription *sub = m_client->subscribe(Rcvtopic,0);
+        fileTopic = ui->fileTopic1->currentText()+ui->fileTopic2->currentText()+"/"
+              +QString::number(topicIndex)+ui->fileTopic3->currentText();
+        const QString content = QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss ")
+                        + QLatin1String("Set SendFileTopic: ")+fileTopic;
+      //  m_client->unsubscribe(Rcvtopic);
 
-    fileRcv = new normalFileRcv(filePath,sub);
-//    connect(fileRcv,&normalFileRcv::sglWrite,this,[this](bool endFlag){if(endFlag == true) ui->fileLogShow->appendPlainText(QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss ")+"数据文件接收完成!");
-//                                                                    else ui->fileLogShow});
-     connect(fileRcv,&normalFileRcv::sglWrite,this,&MyMQTT::fileLogUpdate);
-   ui->logShow->appendPlainText(content);
-   ui->logShow->appendPlainText(content1);
+        const QString content1 = QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss ")
+                        + QLatin1String("Add RcvFileTopic: ")+Rcvtopic;
 
+        QMqttSubscription *sub = m_client->subscribe(Rcvtopic,0);
+
+        fileRcv[topicIndex]->init(filePath,sub);
+
+        connect(sFile[topicIndex],&sendFile::sendFinish,this,[this](){ui->sendFile->setText("下发");   ui->fileLogShow->appendPlainText(QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss ")
+                                                                                                                                  + "数据文件下发成功!");dataFileList.clear();});
+        connect(sFile[topicIndex],&sendFile::sendCancel,this,[this](){ui->sendFile->setText("下发");   ui->fileLogShow->appendPlainText(QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss ")
+                                                                                                                                  + "停止数据文件下发!");});
+        connect(sFile[topicIndex],&sendFile::startSend,this,[this](QString fileName){ui->fileLogShow->appendPlainText(QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss ")
+                                                                                                                                 + "下发："+fileName);});
+       connect(sFile[topicIndex],&sendFile::toPublish,this,[this](const QByteArray &data){if((m_client->publish(fileTopic,data,0,false))<0)qDebug()<<"publish error";});
+
+       connect(fileRcv[topicIndex],&normalFileRcv::sglWrite,this,&MyMQTT::fileLogUpdate);
+       connect(fileRcv[topicIndex],&normalFileRcv::normalData,this,[this,topicIndex](QByteArray data){ui->fileLogShow->appendPlainText(QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss ")+data);if(data.startsWith("OK")){sFile[topicIndex]->nextFile();};                                                                                                   });
+       ui->logShow->appendPlainText(content);
+       ui->logShow->appendPlainText(content1);
+    }
+    else{
+        ui->fileTopicSet->setText("确认");
+        disconnect(sFile[topicIndex],nullptr,this,nullptr);//断开连接
+        disconnect(fileRcv[topicIndex],nullptr,this,nullptr);//断开连接
+
+        m_client->unsubscribe(Rcvtopic);
+        fileRcv[topicIndex]->disable();
+        const QString content = QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss ")
+                        + QLatin1String("Remove SendFileTopic: ")+fileTopic;
+      //  m_client->unsubscribe(Rcvtopic);
+
+        const QString content1 = QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss ")
+                        + QLatin1String("Unsubscribe RcvFileTopic: ")+Rcvtopic;
+        ui->logShow->appendPlainText(content);
+        ui->logShow->appendPlainText(content1);
+
+    }
 
 }
+
+void MyMQTT::on_fileTopicNum_valueChanged(int arg1)
+{
+    if(fileRcv[arg1]->isSet()==true){
+        ui->fileTopicSet->setText("取消");
+    }
+    else{
+        ui->fileTopicSet->setText("确认");
+
+    }
+
+    if(sFile[arg1]->isRunning())
+     {
+        ui->sendFile->setText("停止");
+    }
+    else{
+        ui->sendFile->setText("下发");
+    }
+
+    fileTopic = ui->fileTopic1->currentText()+ui->fileTopic2->currentText()+"/"
+        +QString::number(ui->fileTopicNum->value())+ui->fileTopic3->currentText();
+
+}
+
 
 void MyMQTT::fileLogUpdate(unsigned int size,bool flag){
 
@@ -1264,7 +1323,9 @@ void MyMQTT::fileLogUpdate(unsigned int size,bool flag){
      }
 
 
+}
 
+sendFile::sendFile(){
 
 }
 
@@ -1272,37 +1333,82 @@ void MyMQTT::fileLogUpdate(unsigned int size,bool flag){
 void sendFile::run(){
 
      runFlag = true;
-    do{
+     fileWait = true;
+     qDebug()<<"run";
+     for(int i = 0;i < fileList.size(); i++){
 
-    QByteArray dataPack =fileHandle->read(794); //返回QBytearrary
-    if(fileHandle->pos() ==fileHandle->size() ){ //最后一个数据包
-       // qDebug()<<dataPack.size();
-        dataPack.prepend("#W");
-       dataPack.append("%$#@");
-       emit toPublish(dataPack);
+         fileDeal = new QFile(fileList.at(i));
+         qDebug()<<fileList.at(i);
+
+         QFileInfo fileinfo = QFileInfo(*fileDeal);
+         emit startSend(fileinfo.fileName());
+
+         fileDeal->open(QIODevice::ReadOnly);
+
+//         if(fileList.at(i).endsWith("dat")||fileList.at(i).endsWith("png"))    //判断文件后缀名，.dat则不能使用TEXT_IODEVICE格式打开，否则会丢失0x0d字符，导致文件发送出错
+//            fileDeal->open(QIODevice::ReadOnly);
+//         else
+//            fileDeal->open(QIODevice::ReadOnly | QIODevice::Text);//读取DA数据源文件，格式为TXT
+         // qDebug()<<fileDeal->isOpen();
+
+          //发送首帧
+         QByteArray dataPack(794,0); //返回QBytearrary
+         int index = fileList.at(i).indexOf("/0/");//得到图片的相对路径
+         QString sendPath =fileList.at(i).mid(index+1);
+         sendPath.insert(1,':');       //路径分割
+         sendPath.replace('/','\\');  //斜杠替换
+         QString SendFileName = "&&"+sendPath+"**";//audioFileInfo.fileName()//路径拼接
+         int FileNameLen = strlen(SendFileName.toLatin1().data());
+
+         dataPack.replace(0,FileNameLen,SendFileName.toUtf8());
+         dataPack.prepend("#W");
+         dataPack.append("@#$%");
+         emit toPublish(dataPack);
+         //qDebug()<<dataPack;
+
+         do{
+             QByteArray dataPack =fileDeal->read(794); //返回QBytearrary
+             if(fileDeal->pos() ==fileDeal->size() ){ //最后一个数据包
+                // qDebug()<<dataPack.size();
+                 dataPack.prepend("#W");
+                dataPack.append("%$#@");
+                emit toPublish(dataPack);
+
+             }
+             else{
+
+                 dataPack.prepend("#W");
+                dataPack.append("@#$%");
+                emit toPublish(dataPack);
+                //qDebug()<<"publish";
+
+             }
+
+             QMutexLocker locker(&m_lock);
+            if(!runFlag){
+                qDebug()<<"stop";
+                emit sendCancel();
+                return;
+            }
+            msleep(50);
 
 
-    }
-    else{
-        dataPack.prepend("#W");
-       dataPack.append("@#$%");
-       emit toPublish(dataPack);
+         }
+         while(fileDeal->pos()<fileDeal->size());
+         fileDeal->close();
+         while(fileWait)
+            sleep(1);
+        fileWait = true;
 
-    }
- //   qDebug()<<dataPack.size();
- //   qDebug()<<dataPack;
+     }
+        QByteArray dataPack("#Wcomplete%$#@");
+        dataPack.resize(800);
+        emit toPublish(dataPack);
 
-
-
-     QMutexLocker locker(&m_lock);
-    if(!runFlag){
-        qDebug()<<"stop";
-        emit sendFinish();
-        return;
-    }
-
-    }while(fileHandle->pos()<fileHandle->size());
 
     emit sendFinish();
 
 }
+
+
+

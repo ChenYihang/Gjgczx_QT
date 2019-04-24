@@ -1959,6 +1959,9 @@ background-color: rgb(255, 255, 255);</string>
              <property name="minimum">
               <number>1</number>
              </property>
+             <property name="maximum">
+              <number>10</number>
+             </property>
             </widget>
            </item>
            <item>
@@ -2014,7 +2017,7 @@ border-style: outset;
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="downDataFile">
+            <widget class="QPushButton" name="selectDataFile">
              <property name="styleSheet">
               <string notr="true">QPushButton
 {
@@ -2047,7 +2050,51 @@ border-style: outset;
                    </string>
              </property>
              <property name="text">
-              <string>下发数据文件</string>
+              <string>选择文件</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="sendFile">
+             <property name="maximumSize">
+              <size>
+               <width>80</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QPushButton
+{
+font: 11pt &quot;微软雅黑&quot;;
+
+color: black; 
+background-color:rgb(218, 223, 237);                                       
+
+	
+border:1px groove black; 
+border-style: outset;
+}
+QPushButton::hover
+{ /*鼠标悬停在按钮上时*/
+font: 11pt &quot;微软雅黑&quot;;
+color: black;
+ background-color: rgb(255, 255, 255);
+border:1px groove black; 
+border-style: outset;
+}
+QPushButton::pressed
+{
+font: 11pt &quot;微软雅黑&quot;;
+color: black; 
+border:1px groove black; 
+	background-color: rgb(201, 206, 218);
+border-style: outset;
+}
+
+                   </string>
+             </property>
+             <property name="text">
+              <string>下发</string>
              </property>
             </widget>
            </item>

@@ -50,10 +50,15 @@ class normalFileRcv : public QObject
 {
         Q_OBJECT
 public:
-    explicit normalFileRcv(QString path,QMqttSubscription *sub,QObject *parent = nullptr);
+    explicit normalFileRcv(QObject *parent = nullptr);
     ~normalFileRcv();
+
+    bool isSet(){return isTopicSet;}
+    void init(QString path,QMqttSubscription *sub);
+    void disable(){isTopicSet =  false;};
 signals:
     void sglWrite(int,bool);
+    void normalData(QByteArray);
 
 private slots:
     void receiveFile(const QMqttMessage &msg);
@@ -64,7 +69,7 @@ private:
     QMqttSubscription *fileSub;
     QThreadPool *threadPool;
     enum dataType rcvType;
-
+    bool isTopicSet;
 
 };
 
