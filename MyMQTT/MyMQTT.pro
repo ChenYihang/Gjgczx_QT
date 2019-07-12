@@ -31,41 +31,39 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         mymqtt.cpp \
-    navlistview.cpp \
-    httpapi.cpp \
-    infoupdate.cpp \
-    jsonsolve.cpp \
-    subscription.cpp \
-    jsdocument.cpp \
-    datareceive.cpp \
-    filedeal.cpp
+        navlistview.cpp \
+        httpapi.cpp \
+        infoupdate.cpp \
+        jsonsolve.cpp \
+        subscription.cpp \
+        jsdocument.cpp \
+        datareceive.cpp \
+        filedeal.cpp
 
 HEADERS += \
-    mymqtt.h \
-    navlistview.h \
-    httpapi.h \
-    infoupdate.h \
-    common.h \
-    jsonsolve.h \
-    subscription.h \
-    jsdocument.h \
-    multifunc.h \
-    datareceive.h \
-    filedeal.h
+        mymqtt.h \
+        navlistview.h \
+        httpapi.h \
+        infoupdate.h \
+        common.h \
+        jsonsolve.h \
+        subscription.h \
+        jsdocument.h \
+        multifunc.h \
+        datareceive.h \
+        filedeal.h
 
 FORMS += \
         mymqtt.ui \
-    subscription.ui \
-    datareceive.ui
+        subscription.ui \
+        datareceive.ui
 
 DISTFILES +=
 
 RESOURCES += \
     rc.qrc
 
-
-
-
+CONFIG += C++11
 
 win32:CONFIG(release, debug|release): LIBS += -L$$PWD/lib/ -lQt5Mqtt
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/lib/ -lQt5Mqttd

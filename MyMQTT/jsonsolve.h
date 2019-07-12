@@ -5,6 +5,10 @@
 #include <QScriptEngine>
 #include <QScriptValueIterator>
 #include <QDebug>
+/**
+ * @brief json数据解析类
+ *
+ */
 class jsonSolve : public QObject
 {
     Q_OBJECT

@@ -438,7 +438,7 @@ border-style: outset;
         <widget class="QFrame" name="frame_3">
          <property name="geometry">
           <rect>
-           <x>20</x>
+           <x>10</x>
            <y>20</y>
            <width>811</width>
            <height>381</height>
@@ -456,8 +456,8 @@ border-style: outset;
          <widget class="QWidget" name="gridLayoutWidget_3">
           <property name="geometry">
            <rect>
-            <x>70</x>
-            <y>90</y>
+            <x>90</x>
+            <y>100</y>
             <width>251</width>
             <height>181</height>
            </rect>
@@ -600,163 +600,23 @@ background-color: rgb(255, 255, 255);</string>
            </item>
           </layout>
          </widget>
-         <widget class="QWidget" name="gridLayoutWidget_6">
+         <widget class="QWidget" name="layoutWidget">
           <property name="geometry">
            <rect>
-            <x>430</x>
+            <x>410</x>
             <y>60</y>
-            <width>241</width>
+            <width>311</width>
             <height>251</height>
            </rect>
           </property>
-          <layout class="QGridLayout" name="gridLayout_6">
-           <item row="3" column="2">
-            <widget class="QLineEdit" name="otpversion">
-             <property name="styleSheet">
-              <string notr="true">font: 11pt &quot;微软雅黑&quot;;
-color: rgb(60, 68, 106);
-background-color: rgb(255, 255, 255);</string>
-             </property>
-             <property name="frame">
-              <bool>false</bool>
-             </property>
-             <property name="readOnly">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item row="5" column="2">
-            <widget class="QLineEdit" name="memory">
-             <property name="styleSheet">
-              <string notr="true">font: 11pt &quot;微软雅黑&quot;;
-color: rgb(60, 68, 106);
-background-color: rgb(255, 255, 255);</string>
-             </property>
-             <property name="frame">
-              <bool>false</bool>
-             </property>
-             <property name="readOnly">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item row="7" column="0">
-            <widget class="QLabel" name="label_20">
-             <property name="styleSheet">
-              <string notr="true">font: 11pt &quot;微软雅黑&quot;;</string>
-             </property>
-             <property name="text">
-              <string>最大句柄数:</string>
-             </property>
-            </widget>
-           </item>
-           <item row="5" column="0" alignment="Qt::AlignRight">
-            <widget class="QLabel" name="label_22">
-             <property name="styleSheet">
-              <string notr="true">font: 11pt &quot;微软雅黑&quot;;</string>
-             </property>
-             <property name="text">
-              <string>内存:</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="2">
-            <widget class="QLineEdit" name="eprocess">
-             <property name="styleSheet">
-              <string notr="true">font: 11pt &quot;微软雅黑&quot;;
-color: rgb(60, 68, 106);
-background-color: rgb(255, 255, 255);</string>
-             </property>
-             <property name="frame">
-              <bool>false</bool>
-             </property>
-             <property name="readOnly">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="0" alignment="Qt::AlignRight">
-            <widget class="QLabel" name="label_21">
-             <property name="styleSheet">
-              <string notr="true">font: 11pt &quot;微软雅黑&quot;;</string>
-             </property>
-             <property name="text">
-              <string>OTP版本:</string>
-             </property>
-            </widget>
-           </item>
-           <item row="7" column="2">
-            <widget class="QLineEdit" name="maxfds">
-             <property name="styleSheet">
-              <string notr="true">font: 11pt &quot;微软雅黑&quot;;
-color: rgb(60, 68, 106);
-background-color: rgb(255, 255, 255);</string>
-             </property>
-             <property name="frame">
-              <bool>false</bool>
-             </property>
-             <property name="readOnly">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="0" alignment="Qt::AlignRight">
-            <widget class="QLabel" name="label_23">
-             <property name="styleSheet">
-              <string notr="true">font: 11pt &quot;微软雅黑&quot;;</string>
-             </property>
-             <property name="text">
-              <string>Erlang进程:</string>
-             </property>
-            </widget>
-           </item>
-           <item row="8" column="0" alignment="Qt::AlignRight">
-            <widget class="QLabel" name="label_24">
-             <property name="styleSheet">
-              <string notr="true">font: 11pt &quot;微软雅黑&quot;;</string>
-             </property>
-             <property name="text">
-              <string>系统状态:</string>
-             </property>
-            </widget>
-           </item>
-           <item row="8" column="2">
-            <widget class="QLineEdit" name="systatus">
-             <property name="styleSheet">
-              <string notr="true">font: 11pt &quot;微软雅黑&quot;;
-color: rgb(60, 68, 106);
-background-color: rgb(255, 255, 255);</string>
-             </property>
-             <property name="frame">
-              <bool>false</bool>
-             </property>
-             <property name="readOnly">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="2">
-            <widget class="QLineEdit" name="nodename">
-             <property name="styleSheet">
-              <string notr="true">font: 11pt &quot;微软雅黑&quot;;
-color: rgb(60, 68, 106);
-background-color: rgb(255, 255, 255);</string>
-             </property>
-             <property name="frame">
-              <bool>false</bool>
-             </property>
-             <property name="readOnly">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
+          <layout class="QGridLayout" name="gridLayout_4">
            <item row="0" column="0">
             <widget class="QLabel" name="label_7">
              <property name="styleSheet">
               <string notr="true">font: 11pt &quot;微软雅黑&quot;;</string>
              </property>
              <property name="text">
-              <string>节点名称:</string>
+              <string>节点名称: </string>
              </property>
              <property name="alignment">
               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -773,11 +633,275 @@ background-color: rgb(255, 255, 255);</string>
              </property>
              <property name="sizeHint" stdset="0">
               <size>
-               <width>10</width>
+               <width>13</width>
                <height>20</height>
               </size>
              </property>
             </spacer>
+           </item>
+           <item row="0" column="2">
+            <widget class="QLineEdit" name="nodename">
+             <property name="styleSheet">
+              <string notr="true">font: 11pt &quot;微软雅黑&quot;;
+color: rgb(60, 68, 106);
+background-color: rgb(255, 255, 255);</string>
+             </property>
+             <property name="frame">
+              <bool>false</bool>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="label_23">
+             <property name="styleSheet">
+              <string notr="true">font: 11pt &quot;微软雅黑&quot;;</string>
+             </property>
+             <property name="text">
+              <string>         Erlang进程:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <spacer name="horizontalSpacer_10">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeType">
+              <enum>QSizePolicy::Fixed</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>13</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item row="1" column="2">
+            <widget class="QLineEdit" name="eprocess">
+             <property name="styleSheet">
+              <string notr="true">font: 11pt &quot;微软雅黑&quot;;
+color: rgb(60, 68, 106);
+background-color: rgb(255, 255, 255);</string>
+             </property>
+             <property name="frame">
+              <bool>false</bool>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QLabel" name="label_21">
+             <property name="styleSheet">
+              <string notr="true">font: 11pt &quot;微软雅黑&quot;;</string>
+             </property>
+             <property name="text">
+              <string>Erlang/OTP版本:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <spacer name="horizontalSpacer_11">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeType">
+              <enum>QSizePolicy::Fixed</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>13</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item row="2" column="2">
+            <widget class="QLineEdit" name="otpversion">
+             <property name="styleSheet">
+              <string notr="true">font: 11pt &quot;微软雅黑&quot;;
+color: rgb(60, 68, 106);
+background-color: rgb(255, 255, 255);</string>
+             </property>
+             <property name="frame">
+              <bool>false</bool>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="0">
+            <widget class="QLabel" name="label_22">
+             <property name="styleSheet">
+              <string notr="true">font: 11pt &quot;微软雅黑&quot;;</string>
+             </property>
+             <property name="text">
+              <string>                    内存:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="1">
+            <spacer name="horizontalSpacer_12">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeType">
+              <enum>QSizePolicy::Fixed</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>13</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item row="3" column="2">
+            <widget class="QLineEdit" name="memory">
+             <property name="styleSheet">
+              <string notr="true">font: 11pt &quot;微软雅黑&quot;;
+color: rgb(60, 68, 106);
+background-color: rgb(255, 255, 255);</string>
+             </property>
+             <property name="frame">
+              <bool>false</bool>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="0">
+            <widget class="QLabel" name="label_20">
+             <property name="styleSheet">
+              <string notr="true">font: 11pt &quot;微软雅黑&quot;;</string>
+             </property>
+             <property name="text">
+              <string>         最大句柄数:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="1">
+            <spacer name="horizontalSpacer_13">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeType">
+              <enum>QSizePolicy::Fixed</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>13</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item row="4" column="2">
+            <widget class="QLineEdit" name="maxfds">
+             <property name="styleSheet">
+              <string notr="true">font: 11pt &quot;微软雅黑&quot;;
+color: rgb(60, 68, 106);
+background-color: rgb(255, 255, 255);</string>
+             </property>
+             <property name="frame">
+              <bool>false</bool>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="0">
+            <widget class="QLabel" name="label_24">
+             <property name="styleSheet">
+              <string notr="true">font: 11pt &quot;微软雅黑&quot;;</string>
+             </property>
+             <property name="text">
+              <string>             系统状态:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="1">
+            <spacer name="horizontalSpacer_14">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeType">
+              <enum>QSizePolicy::Fixed</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>13</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item row="5" column="2">
+            <widget class="QLineEdit" name="systatus">
+             <property name="styleSheet">
+              <string notr="true">font: 11pt &quot;微软雅黑&quot;;
+color: rgb(60, 68, 106);
+background-color: rgb(255, 255, 255);</string>
+             </property>
+             <property name="frame">
+              <bool>false</bool>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="6" column="0">
+            <widget class="QLabel" name="label_31">
+             <property name="font">
+              <font>
+               <family>微软雅黑</family>
+               <pointsize>11</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>                     CPU:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="6" column="1">
+            <spacer name="horizontalSpacer_17">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeType">
+              <enum>QSizePolicy::Fixed</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>13</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item row="6" column="2">
+            <widget class="QLineEdit" name="cpu">
+             <property name="styleSheet">
+              <string notr="true">font: 11pt &quot;微软雅黑&quot;;
+color: rgb(60, 68, 106);
+background-color: rgb(255, 255, 255);</string>
+             </property>
+             <property name="frame">
+              <bool>false</bool>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+            </widget>
            </item>
           </layout>
          </widget>
@@ -899,8 +1023,8 @@ color: rgb(60, 68, 106);
            <rect>
             <x>30</x>
             <y>30</y>
-            <width>541</width>
-            <height>311</height>
+            <width>751</width>
+            <height>321</height>
            </rect>
           </property>
           <property name="styleSheet">
@@ -1064,7 +1188,7 @@ background-color: rgb(255, 255, 255);</string>
            <enum>QTabWidget::Triangular</enum>
           </property>
           <property name="currentIndex">
-           <number>1</number>
+           <number>0</number>
           </property>
           <property name="tabBarAutoHide">
            <bool>false</bool>
@@ -1893,7 +2017,7 @@ border-style: outset;
           <rect>
            <x>20</x>
            <y>20</y>
-           <width>801</width>
+           <width>811</width>
            <height>381</height>
           </rect>
          </property>
@@ -1906,82 +2030,73 @@ border-style: outset;
          <property name="frameShadow">
           <enum>QFrame::Raised</enum>
          </property>
-         <widget class="QWidget" name="horizontalLayoutWidget_2">
-          <property name="geometry">
-           <rect>
-            <x>40</x>
-            <y>50</y>
-            <width>721</width>
-            <height>31</height>
-           </rect>
-          </property>
-          <layout class="QHBoxLayout" name="horizontalLayout_13">
-           <item>
-            <widget class="QLabel" name="label_30">
-             <property name="styleSheet">
-              <string notr="true">font: 11pt &quot;微软雅黑&quot;;</string>
-             </property>
-             <property name="text">
-              <string>设置文件主题:</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QComboBox" name="fileTopic1">
-             <property name="styleSheet">
-              <string notr="true">font: 11pt &quot;微软雅黑&quot;;
+         <layout class="QGridLayout" name="gridLayout_6">
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_30">
+            <property name="styleSheet">
+             <string notr="true">font: 11pt &quot;微软雅黑&quot;;</string>
+            </property>
+            <property name="text">
+             <string>设置文件主题:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QComboBox" name="fileTopic1">
+            <property name="styleSheet">
+             <string notr="true">font: 11pt &quot;微软雅黑&quot;;
 </string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QComboBox" name="fileTopic2">
-             <property name="styleSheet">
-              <string notr="true">font: 11pt &quot;微软雅黑&quot;;
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2">
+           <widget class="QComboBox" name="fileTopic2">
+            <property name="styleSheet">
+             <string notr="true">font: 11pt &quot;微软雅黑&quot;;
 </string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QSpinBox" name="fileTopicNum">
-             <property name="maximumSize">
-              <size>
-               <width>50</width>
-               <height>16777215</height>
-              </size>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">font: 11pt &quot;微软雅黑&quot;;
-color: rgb(60, 68, 106);
-
-background-color: rgb(255, 255, 255);</string>
-             </property>
-             <property name="minimum">
-              <number>1</number>
-             </property>
-             <property name="maximum">
-              <number>10</number>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QComboBox" name="fileTopic3">
-             <property name="styleSheet">
-              <string notr="true">font: 11pt &quot;微软雅黑&quot;;
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="3">
+           <widget class="QLineEdit" name="fileTopicNum">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="font">
+             <font>
+              <family>微软雅黑</family>
+              <pointsize>11</pointsize>
+             </font>
+            </property>
+            <property name="maxLength">
+             <number>20000</number>
+            </property>
+            <property name="dragEnabled">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="4" colspan="2">
+           <widget class="QComboBox" name="fileTopic3">
+            <property name="styleSheet">
+             <string notr="true">font: 11pt &quot;微软雅黑&quot;;
 </string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="fileTopicSet">
-             <property name="maximumSize">
-              <size>
-               <width>80</width>
-               <height>16777215</height>
-              </size>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">QPushButton
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="6">
+           <widget class="QPushButton" name="fileTopicSet">
+            <property name="maximumSize">
+             <size>
+              <width>80</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton
 {
 font: 11pt &quot;微软雅黑&quot;;
 
@@ -2010,16 +2125,22 @@ border-style: outset;
 }
 
                    </string>
-             </property>
-             <property name="text">
-              <string>确认</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="selectDataFile">
-             <property name="styleSheet">
-              <string notr="true">QPushButton
+            </property>
+            <property name="text">
+             <string>确认订阅</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="7">
+           <widget class="QPushButton" name="pushButton">
+            <property name="font">
+             <font>
+              <family>微软雅黑</family>
+              <pointsize>11</pointsize>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton
 {
 font: 11pt &quot;微软雅黑&quot;;
 
@@ -2048,22 +2169,49 @@ border-style: outset;
 }
 
                    </string>
-             </property>
-             <property name="text">
-              <string>选择文件</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="sendFile">
-             <property name="maximumSize">
-              <size>
-               <width>80</width>
-               <height>16777215</height>
-              </size>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">QPushButton
+            </property>
+            <property name="text">
+             <string>取消订阅</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_32">
+            <property name="font">
+             <font>
+              <family>微软雅黑</family>
+              <pointsize>11</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>选择下发主题：</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1" colspan="3">
+           <widget class="QComboBox" name="topicDisplay">
+            <property name="styleSheet">
+             <string notr="true">font: 11pt &quot;微软雅黑&quot;;
+</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="4">
+           <widget class="QPushButton" name="fileTopicChoose">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="font">
+             <font>
+              <family>微软雅黑</family>
+              <pointsize>11</pointsize>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton
 {
 font: 11pt &quot;微软雅黑&quot;;
 
@@ -2092,30 +2240,164 @@ border-style: outset;
 }
 
                    </string>
-             </property>
-             <property name="text">
-              <string>下发</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </widget>
-         <widget class="QPlainTextEdit" name="fileLogShow">
-          <property name="geometry">
-           <rect>
-            <x>40</x>
-            <y>100</y>
-            <width>721</width>
-            <height>251</height>
-           </rect>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">font: 9pt &quot;微软雅黑&quot;;</string>
-          </property>
-          <property name="readOnly">
-           <bool>true</bool>
-          </property>
-         </widget>
+            </property>
+            <property name="text">
+             <string>确认主题</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="5">
+           <widget class="QPushButton" name="selectDataFile">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton
+{
+font: 11pt &quot;微软雅黑&quot;;
+
+color: black; 
+background-color:rgb(218, 223, 237);                                       
+
+	
+border:1px groove black; 
+border-style: outset;
+}
+QPushButton::hover
+{ /*鼠标悬停在按钮上时*/
+font: 11pt &quot;微软雅黑&quot;;
+color: black;
+ background-color: rgb(255, 255, 255);
+border:1px groove black; 
+border-style: outset;
+}
+QPushButton::pressed
+{
+font: 11pt &quot;微软雅黑&quot;;
+color: black; 
+border:1px groove black; 
+	background-color: rgb(201, 206, 218);
+border-style: outset;
+}
+
+                   </string>
+            </property>
+            <property name="text">
+             <string>选择文件</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="6">
+           <widget class="QPushButton" name="sendFile">
+            <property name="maximumSize">
+             <size>
+              <width>80</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton
+{
+font: 11pt &quot;微软雅黑&quot;;
+
+color: black; 
+background-color:rgb(218, 223, 237);                                       
+
+	
+border:1px groove black; 
+border-style: outset;
+}
+QPushButton::hover
+{ /*鼠标悬停在按钮上时*/
+font: 11pt &quot;微软雅黑&quot;;
+color: black;
+ background-color: rgb(255, 255, 255);
+border:1px groove black; 
+border-style: outset;
+}
+QPushButton::pressed
+{
+font: 11pt &quot;微软雅黑&quot;;
+color: black; 
+border:1px groove black; 
+	background-color: rgb(201, 206, 218);
+border-style: outset;
+}
+
+                   </string>
+            </property>
+            <property name="text">
+             <string>确定下发</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="7">
+           <widget class="QPushButton" name="sendFileCancel">
+            <property name="font">
+             <font>
+              <family>微软雅黑</family>
+              <pointsize>11</pointsize>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton
+{
+font: 11pt &quot;微软雅黑&quot;;
+
+color: black; 
+background-color:rgb(218, 223, 237);                                       
+
+	
+border:1px groove black; 
+border-style: outset;
+}
+QPushButton::hover
+{ /*鼠标悬停在按钮上时*/
+font: 11pt &quot;微软雅黑&quot;;
+color: black;
+ background-color: rgb(255, 255, 255);
+border:1px groove black; 
+border-style: outset;
+}
+QPushButton::pressed
+{
+font: 11pt &quot;微软雅黑&quot;;
+color: black; 
+border:1px groove black; 
+	background-color: rgb(201, 206, 218);
+border-style: outset;
+}
+
+                   </string>
+            </property>
+            <property name="text">
+             <string>停止下发</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0" colspan="8">
+           <widget class="QPlainTextEdit" name="fileLogShow">
+            <property name="font">
+             <font>
+              <family>微软雅黑</family>
+              <pointsize>9</pointsize>
+              <weight>50</weight>
+              <italic>false</italic>
+              <bold>false</bold>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">font: 9pt &quot;微软雅黑&quot;;</string>
+            </property>
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </widget>
        </widget>
        <widget class="QWidget" name="page_6">
@@ -2835,6 +3117,15 @@ color: rgb(60, 68, 106);</string>
          <width>16777215</width>
          <height>132</height>
         </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>微软雅黑</family>
+         <pointsize>9</pointsize>
+         <weight>50</weight>
+         <italic>false</italic>
+         <bold>false</bold>
+        </font>
        </property>
        <property name="styleSheet">
         <string notr="true">font: 9pt &quot;微软雅黑&quot;;</string>

@@ -6,6 +6,11 @@
 #include <QNetworkRequest>
 #include <QNetworkAccessManager>
 
+
+/**
+ * @brief http接口类， 通过REST API 获取MQTT信息
+ *
+ */
 class httpAPI : public QObject
 {
     Q_OBJECT

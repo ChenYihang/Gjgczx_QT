@@ -6,6 +6,11 @@
 #include <QDateTime>
 #include <QDebug>
 
+/**
+ * @brief 订阅类
+ *
+ * 类的详细概述
+ */
 namespace Ui {
 class subscription;
 }

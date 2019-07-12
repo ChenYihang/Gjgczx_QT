@@ -5,9 +5,8 @@ jsDocument::jsDocument(QObject *parent) : QObject(parent)
 
 }
 
-
-void jsDocument::onMsg(const QString &msg){
-
+void jsDocument::onMsg(const QString &msg)
+{
     emit recvdMsg(msg);
 }
 

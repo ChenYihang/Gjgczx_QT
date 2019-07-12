@@ -18,9 +18,12 @@ QSize NavDelegate::sizeHint(const QStyleOptionViewItem &option, const QModelInde
 {
 	NavModel::TreeNode *node = (NavModel::TreeNode *)index.data(Qt::UserRole).toUInt();
 
-	if (node->level == 1) {
+    if (node->level == 1)
+    {
 		return QSize(50, 35);
-	} else {
+    }
+    else
+    {
 		return QSize(50, 28);
 	}
 }
@@ -33,9 +36,11 @@ void NavDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, c
 	//绘制背景
 	QColor colorBg;
 
-	if (option.state & QStyle::State_Selected) {
+    if (option.state & QStyle::State_Selected)
+    {
 		colorBg = nav->getColorBgSelected();
-	} else if (option.state & QStyle::State_MouseOver) {
+    } else if (option.state & QStyle::State_MouseOver)
+    {
 		colorBg = nav->getColorBgHover();
 	} else {
 		colorBg = nav->getColorBgNormal();
@@ -56,42 +61,60 @@ void NavDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, c
 		QColor icoColorNormal;
 		QColor icoColorHover;
 
-		if (nav->getIcoColorBg()) {
+        if (nav->getIcoColorBg())
+        {
 			icoColorSelected = nav->getColorBgNormal();
 			icoColorNormal = nav->getColorBgSelected();
 			icoColorHover = nav->getColorBgNormal();
-		} else {
+        }
+        else
+        {
 			icoColorSelected = nav->getColorTextSelected();
 			icoColorNormal = nav->getColorTextNormal();
 			icoColorHover = nav->getColorTextHover();
 		}
 
-		if (nav->getIcoStyle() == NavListView::IcoStyle_Cross) {
+        if (nav->getIcoStyle() == NavListView::IcoStyle_Cross)
+        {
 			p.setBrush(Qt::NoBrush);
 
-			if (option.state & QStyle::State_Selected) {
+            if (option.state & QStyle::State_Selected)
+            {
 				p.setPen(QPen(icoColorSelected, penWidth));
-			} else if (option.state & QStyle::State_MouseOver) {
+            }
+            else if (option.state & QStyle::State_MouseOver)
+            {
 				p.setPen(QPen(icoColorHover, penWidth));
-			} else {
+            } else
+            {
 				p.setPen(QPen(icoColorNormal, penWidth));
 			}
 
 			//绘制+-线条图片
-			if (node->collapse) {
+            if (node->collapse)
+            {
 				p.drawLine(QPointF(8, 8), QPointF(18, 8));
 				p.drawLine(QPointF(12, 4), QPointF(12, 12));
-			} else {
+            }
+            else
+            {
 				p.drawLine(QPointF(8, 8), QPointF(18, 8));
 			}
-		} else if (nav->getIcoStyle() == NavListView::IcoStyle_Triangle) {
+        }
+        else if (nav->getIcoStyle() == NavListView::IcoStyle_Triangle)
+        {
 			p.setPen(Qt::NoPen);
 
-			if (option.state & QStyle::State_Selected) {
+            if (option.state & QStyle::State_Selected)
+            {
 				p.setBrush(icoColorSelected);
-			} else if (option.state & QStyle::State_MouseOver) {
+            }
+            else if (option.state & QStyle::State_MouseOver)
+            {
 				p.setBrush(icoColorHover);
-			} else {
+            }
+            else
+            {
 				p.setBrush(icoColorNormal);
 			}
 
@@ -150,10 +173,12 @@ void NavDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, c
 	painter->drawText(rect, Qt::AlignLeft | Qt::AlignVCenter, index.data(Qt::DisplayRole).toString());
 
 	//绘制分隔符线条
-	if (nav->getLineVisible()) {
+    if (nav->getLineVisible())
+    {
 		painter->setPen(QPen(nav->getColorLine(), 1));
 
-		if (node->level == 1 || (node->level == 2 && node->theLast)) {
+        if (node->level == 1 || (node->level == 2 && node->theLast))
+        {
 			painter->drawLine(QPointF(option.rect.x(), option.rect.y() + option.rect.height()),
 			                  QPointF(option.rect.x() + option.rect.width(), option.rect.y() + option.rect.height()));
 		}
@@ -163,7 +188,8 @@ void NavDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, c
 	QString recordInfo = node->info;
 
 	//如果不需要显示提示信息或者提示信息为空则返回
-	if (!nav->getInfoVisible() || recordInfo.isEmpty()) {
+    if (!nav->getInfoVisible() || recordInfo.isEmpty())
+    {
 		return;
 	}
 
@@ -185,12 +211,14 @@ void NavDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, c
 	painter->fillPath(path, decorationBrush);
 
 	//如果是数字则将超过999的数字显示成 999+
-	if (recordInfo.toInt() > 999) {
+    if (recordInfo.toInt() > 999)
+    {
 		recordInfo = "999+";
 	}
 
 	//如果显示的提示信息长度超过4则将多余显示成省略号..
-	if (recordInfo.length() > 4) {
+    if (recordInfo.length() > 4)
+    {
 		recordInfo = recordInfo.mid(0, 4) + "..";
 	}
 
@@ -219,12 +247,14 @@ NavModel::~NavModel()
 void NavModel::readData(QString path)
 {
 	QFile xml(path);
-	if (!xml.open(QIODevice::ReadOnly | QIODevice::Text)) {
+    if (!xml.open(QIODevice::ReadOnly | QIODevice::Text))
+    {
 		return;
 	}
 	QDomDocument doc;
 
-	if (!doc.setContent(&xml, false)) {
+    if (!doc.setContent(&xml, false))
+    {
 		return;
 	}
 
@@ -234,7 +264,8 @@ void NavModel::readData(QString path)
 	QDomNode root = doc.documentElement().firstChildElement("layout");
 	QDomNodeList children = root.childNodes();
 
-	for (int i = 0; i != children.count(); ++i) {
+    for (int i = 0; i != children.count(); ++i)
+    {
 		QDomElement nodeInfo = children.at(i).toElement();
 		TreeNode *node = new TreeNode;
 		node->label = nodeInfo.attribute("label");
@@ -244,7 +275,8 @@ void NavModel::readData(QString path)
 
 		QDomNodeList secondLevel = nodeInfo.childNodes();
 
-		for (int j = 0; j != secondLevel.count(); ++j) {
+        for (int j = 0; j != secondLevel.count(); ++j)
+        {
 			QDomElement secNodeInfo = secondLevel.at(j).toElement();
 			TreeNode *secNode = new TreeNode;
 			secNode->label = secNodeInfo.attribute("label");
@@ -268,7 +300,8 @@ void NavModel::setData(QStringList listItem)
 {
 	int count = listItem.count();
 
-	if (count == 0) {
+    if (count == 0)
+    {
 		return;
 	}
 
@@ -276,11 +309,13 @@ void NavModel::setData(QStringList listItem)
 	listNode.clear();
 
 	//listItem格式: 标题|父节点标题(父节点为空)|是否展开|提示信息
-	for (int i = 0; i < count; i++) {
+    for (int i = 0; i < count; i++)
+    {
 		QString item = listItem.at(i);
 		QStringList list = item.split("|");
 
-		if (list.count() < 4) {
+        if (list.count() < 4)
+        {
 			continue;
 		}
 
@@ -290,7 +325,8 @@ void NavModel::setData(QStringList listItem)
 		QString collapse = list.at(2);
 		QString info = list.at(3);
 
-		if (fatherTitle.isEmpty()) {
+        if (fatherTitle.isEmpty())
+        {
 			TreeNode *node = new TreeNode;
 			node->label = title;
 			node->collapse = collapse.toInt();
@@ -298,11 +334,13 @@ void NavModel::setData(QStringList listItem)
 			node->level = 1;
 
 			//查找该父节点是否有对应子节点,有则加载
-			for (int j = 0; j < count; j++) {
+            for (int j = 0; j < count; j++)
+            {
 				QString secItem = listItem.at(j);
 				QStringList secList = secItem.split("|");
 
-				if (secList.count() < 4) {
+                if (secList.count() < 4)
+                {
 					continue;
 				}
 
@@ -310,7 +348,8 @@ void NavModel::setData(QStringList listItem)
                 QString secFatherTitle = secList.at(1);
                 QString secInfo = secList.at(3);
 
-				if (secFatherTitle == title) {
+                if (secFatherTitle == title)
+                {
 					TreeNode *secNode = new TreeNode;
 					secNode->label = secTitle;
 					secNode->info = secInfo;
@@ -341,13 +380,16 @@ QVariant NavModel::data(const QModelIndex &index, int role) const
 		return QVariant();
 	}
 
-	if (index.row() >= listNode.size() || index.row() < 0) {
+    if (index.row() >= listNode.size() || index.row() < 0)
+    {
 		return QVariant();
 	}
 
-	if (role == Qt::DisplayRole) {
+    if (role == Qt::DisplayRole)
+    {
 		return listNode[index.row()].label;
-	} else if (role == Qt::UserRole) {
+    } else if (role == Qt::UserRole)
+    {
 		return (unsigned int)(listNode[index.row()].treeNode);
 	}
 
@@ -358,17 +400,20 @@ void NavModel::refreshList()
 {
 	listNode.clear();
 
-    for (std::vector<TreeNode *>::iterator it = treeNode.begin(); it != treeNode.end(); ++it) {
+    for (std::vector<TreeNode *>::iterator it = treeNode.begin(); it != treeNode.end(); ++it)
+    {
         ListNode node;
         node.label = (*it)->label;
         node.treeNode = *it;
 
         listNode.push_back(node);
-        if ((*it)->collapse) {
+        if ((*it)->collapse)
+        {
             continue;
         }
 
-        for (std::list<TreeNode *>::iterator child = (*it)->children.begin(); child != (*it)->children.end(); ++child) {
+        for (std::list<TreeNode *>::iterator child = (*it)->children.begin(); child != (*it)->children.end(); ++child)
+        {
             ListNode node;
             node.label = (*child)->label;
             node.treeNode = *child;
@@ -376,7 +421,8 @@ void NavModel::refreshList()
             listNode.push_back(node);
         }
 
-        if (!listNode.empty()) {
+        if (!listNode.empty())
+        {
             listNode.back().treeNode->theLast = true;
         }
     }
@@ -386,7 +432,8 @@ void NavModel::collapse(const QModelIndex &index)
 {
 	TreeNode *node = listNode[index.row()].treeNode;
 
-	if (node->children.size() == 0) {
+    if (node->children.size() == 0)
+    {
 		return;
     }
     node->collapse = !node->collapse;
@@ -399,9 +446,6 @@ void NavModel::collapse(const QModelIndex &index)
     }
 
     refreshList();  //20181108 修复该BUG
-
-
-
 }
 
 NavListView::NavListView(QWidget *parent) : QListView(parent)

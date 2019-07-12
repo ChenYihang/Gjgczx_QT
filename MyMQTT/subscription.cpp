@@ -27,7 +27,6 @@ subscription::~subscription()
     qDebug()<<"del";
 }
 
-
 void subscription::updateMessage(const QMqttMessage &msg)
 {
     //ui->listWidget->addItem(msg.payload());
@@ -40,12 +39,12 @@ void subscription::updateMessage(const QMqttMessage &msg)
     qDebug()<<msg.topic();
     qDebug()<<msg.payload().length();
     emit rcvToMainUpdate();
-
 }
 
 void subscription::updateStatus(QMqttSubscription::SubscriptionState state)
 {
-    switch (state) {
+    switch (state)
+    {
     case QMqttSubscription::Unsubscribed:
         subState = QLatin1String("Unsubscribed");
         break;
@@ -62,11 +61,9 @@ void subscription::updateStatus(QMqttSubscription::SubscriptionState state)
         break;
     }
     emit staToMainUpdate();
-
 }
 
-void subscription::updataQos(quint8 qos){
-
-
+void subscription::updataQos(quint8 qos)
+{
 
 }

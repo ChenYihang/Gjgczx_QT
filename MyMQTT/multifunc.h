@@ -217,9 +217,6 @@ public:
     }
 
 
-
-
-
     //自写，根据帧头获取长度信息
     static int GetDataFileLength(QByteArray data)
     {
@@ -244,8 +241,6 @@ public:
         }
         return data10;
     }
-
-
 
     //计算校验码
     static uchar GetCheckCode(uchar data[],uchar len)
@@ -607,7 +602,5 @@ public:
     }
 
 };
-
-
 
 #endif // MULTIFUNC_H

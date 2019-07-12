@@ -15,17 +15,21 @@ namespace Ui {
 class dataReceive;
 }
 
+/**
+ * @brief 数据接收处理类
+ * 类的详细概述
+ */
 class dataReceive : public QWidget
 {
     Q_OBJECT
 
 public:
     explicit dataReceive(QString path,QWidget *parent = nullptr);
-  //  explicit dataReceive(QString path,QMqttSubscription *sub,QWidget *parent = nullptr);
+  //explicit dataReceive(QString path,QMqttSubscription *sub,QWidget *parent = nullptr);
     ~dataReceive();
 
-  //
     QString filePath;
+
 public slots:
     void newRcvSub(QMqttSubscription *sub);
 
@@ -46,6 +50,10 @@ private:
 
 };
 
+/**
+ * @brief 文件接收处理类
+ *
+ */
 class normalFileRcv : public QObject
 {
         Q_OBJECT
@@ -55,7 +63,7 @@ public:
 
     bool isSet(){return isTopicSet;}
     void init(QString path,QMqttSubscription *sub);
-    void disable(){isTopicSet =  false;};
+    void disable(){isTopicSet =  false;}
 signals:
     void sglWrite(int,bool);
     void normalData(QByteArray);

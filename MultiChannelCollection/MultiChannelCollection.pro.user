@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.7.2, 2019-04-19T18:41:44. -->
+<!-- Written by QtCreator 4.7.2, 2019-06-26T17:43:38. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -290,8 +290,8 @@
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">MultiChannelCollection</value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName"></value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:D:/QT_Project/MultiChannelCollection/MultiChannelCollection.pro</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">MultiChannelCollection2</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:D:/QT_Project/Gjgczx_QT/MultiChannelCollection/MultiChannelCollection.pro</value>
     <value type="bool" key="QmakeProjectManager.QmakeRunConfiguration.UseLibrarySearchPath">true</value>
     <value type="QString" key="Qt4ProjectManager.Qt4RunConfiguration.CommandLineArguments"></value>
     <value type="QString" key="Qt4ProjectManager.Qt4RunConfiguration.ProFile">MultiChannelCollection.pro</value>
